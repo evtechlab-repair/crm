@@ -582,11 +582,13 @@
       background: var(--surface-container-lowest);
       width: 100%;
       max-width: 600px;
-      max-height: 90vh;
+      max-height: 85vh;
+      max-height: 85dvh;
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
-      padding: 24px;
+      padding: 24px 24px 90px 24px;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
       transform: translateY(100%);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
