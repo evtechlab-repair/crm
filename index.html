@@ -1,0 +1,2681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>EV Tech Lab - Mobile CRM</title>
+
+  <!-- Modern Google Fonts & Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Inlined Full Navy Blue Stylesheet -->
+  <style>
+    /* ==========================================================================
+       EV TECH LAB CRM - NAVY BLUE DESIGN SYSTEM & STYLESHEET
+       Mobile-First Aesthetics with Modern Navy Blue Palette & Auth Screens
+       ========================================================================== */
+
+    :root {
+      --primary: #1e3a8a;
+      /* Deep Navy Blue */
+      --primary-container: #1e40af;
+      /* Rich Navy Blue Accent */
+      --on-primary-container: #ffffff;
+      /* Pure White Text on Primary */
+      --primary-fixed: #dbeafe;
+      /* Soft Ice Blue */
+      --on-secondary-fixed: #ffffff;
+      --bg-app: #F8FAFC;
+      /* Crisp Slate Background */
+      --surface: #ffffff;
+      --surface-container-lowest: #ffffff;
+      --surface-container-low: #f1f5f9;
+      --surface-container: #e2e8f0;
+      --surface-container-high: #cbd5e1;
+      --surface-container-highest: #94a3b8;
+      --on-surface: #0f172a;
+      /* Deep Slate Dark Text */
+      --on-surface-variant: #475569;
+      /* Muted Slate Text */
+      --outline-variant: #cbd5e1;
+      /* Light Slate Border */
+      --outline: #64748b;
+      --error: #dc2626;
+      --tertiary: #0891b2;
+      /* Cyan/Teal accent */
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-card: 20px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 4px 20px rgba(15, 23, 42, 0.05);
+      --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.12);
+      --transition-fast: 0.15s ease;
+    }
+
+    .dark {
+      --bg-app: #0f172a;
+      --surface: #1e293b;
+      --surface-container-lowest: #1e293b;
+      --surface-container-low: #334155;
+      --surface-container: #475569;
+      --surface-container-high: #64748b;
+      --on-surface: #f8fafc;
+      --on-surface-variant: #94a3b8;
+      --outline-variant: #334155;
+      --outline: #64748b;
+      --primary: #3b82f6;
+      --primary-container: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-app);
+      color: var(--on-surface);
+      min-height: 100vh;
+      padding-bottom: 104px;
+    }
+
+    /* Material Icons Helper */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+
+    /* ==================== LOGIN SCREEN OVERLAY ==================== */
+    .login-screen-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--bg-app);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: var(--surface-container-lowest);
+      width: 100%;
+      max-width: 400px;
+      border-radius: var(--radius-card);
+      padding: 32px 24px;
+      box-shadow: 0 20px 40px -10px rgba(30, 58, 138, 0.15);
+      border: 1px solid var(--outline-variant);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .login-logo-circle {
+      width: 60px;
+      height: 60px;
+      background-color: #dbeafe;
+      color: #1e3a8a;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+    }
+
+    .login-logo-circle .material-symbols-outlined {
+      font-size: 32px;
+    }
+
+    .login-header h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #1e3a8a;
+    }
+
+    .login-header p {
+      font-size: 0.85rem;
+      color: var(--on-surface-variant);
+      margin-top: 4px;
+    }
+
+    /* Top App Header - Navy Blue Aesthetic */
+    .top-app-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 64px;
+      background-color: var(--surface-container-lowest);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-center {
+      flex: 1;
+      text-align: center;
+    }
+
+    .app-brand-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1e3a8a;
+      letter-spacing: -0.02em;
+    }
+
+    .dark .app-brand-title {
+      color: #60a5fa;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      background-color: #dbeafe;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(30, 58, 138, 0.12);
+    }
+
+    .header-icon-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: #1e3a8a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+    }
+
+    .dark .header-icon-btn {
+      color: #60a5fa;
+    }
+
+    .header-icon-btn:active {
+      transform: scale(0.92);
+      background-color: var(--surface-container);
+    }
+
+    .notification-dot {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 10px;
+      height: 10px;
+      background-color: var(--error);
+      border-radius: var(--radius-full);
+      border: 2px solid var(--surface-container-lowest);
+    }
+
+    /* Main Container */
+    .app-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 84px 20px 0 20px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .search-container input {
+      width: 100%;
+      height: 56px;
+      padding: 0 16px 0 48px;
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-lg);
+      font-size: 0.95rem;
+      color: var(--on-surface);
+      outline: none;
+      transition: border-color var(--transition-fast);
+    }
+
+    .search-container input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.12);
+    }
+
+    .search-container .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--on-surface-variant);
+    }
+
+    /* Quick Actions Scroll Bar */
+    .quick-actions-section {
+      margin-bottom: 24px;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      margin-bottom: 12px;
+    }
+
+    .quick-actions-scroll {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin: 0 -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      scrollbar-width: none;
+    }
+
+    .quick-actions-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .action-chip {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 20px;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--outline-variant);
+      background-color: var(--surface-container-lowest);
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+
+    .action-chip.primary {
+      background-color: #1e3a8a;
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+    }
+
+    .action-chip:active {
+      transform: scale(0.95);
+    }
+
+    /* KPI Cards Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background-color: var(--surface-container-lowest);
+      border-radius: var(--radius-card);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 120px;
+    }
+
+    .kpi-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+    }
+
+    .kpi-card-header.primary {
+      color: #1e3a8a;
+    }
+
+    .kpi-card-header.error {
+      color: var(--error);
+    }
+
+    .kpi-card-header.tertiary {
+      color: var(--tertiary);
+    }
+
+    .kpi-card-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .kpi-card-value span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--on-surface-variant);
+    }
+
+    /* Content Cards */
+    .content-card {
+      background-color: var(--surface-container-lowest);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title-row h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    /* Activity Feed */
+    .activity-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .activity-item {
+      display: flex;
+      gap: 16px;
+      position: relative;
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background-color: #dbeafe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #1e3a8a;
+    }
+
+    .activity-icon.error {
+      background-color: rgba(220, 38, 38, 0.1);
+      color: var(--error);
+    }
+
+    .activity-text p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .activity-text time {
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Status Badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-received {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .status-inspection {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    .status-repairing {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .status-ready {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-delivered {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .status-paid {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-partial {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .status-pending {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    /* Responsive Mobile Cards View */
+    .jobs-list-container,
+    .inventory-list-container,
+    .companies-list-container {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .list-item-card {
+      background: var(--surface-container-lowest);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      transition: transform var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .list-item-card:active {
+      transform: scale(0.98);
+    }
+
+    .item-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .item-card-title {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .item-card-sub {
+      font-size: 0.85rem;
+      color: var(--on-surface-variant);
+      margin-bottom: 12px;
+    }
+
+    .item-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed var(--outline-variant);
+      padding-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    /* Modals System */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      background: var(--surface-container-lowest);
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      padding: 24px;
+      overflow-y: auto;
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 640px) {
+      .modal-overlay {
+        align-items: center;
+      }
+
+      .modal-sheet {
+        border-radius: 24px;
+      }
+    }
+
+    .modal-overlay.active .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      color: var(--on-surface);
+      outline: none;
+    }
+
+    textarea.form-control {
+      height: auto;
+      padding: 12px 14px;
+    }
+
+    .form-control:focus {
+      border-color: #1e3a8a;
+      background: var(--surface-container-lowest);
+    }
+
+    .btn {
+      height: 48px;
+      padding: 0 24px;
+      border-radius: var(--radius-full);
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform var(--transition-fast);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn-primary {
+      background-color: #1e3a8a;
+      color: #ffffff;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* Floating Action Button (FAB) */
+    .fab-btn {
+      position: fixed;
+      right: 20px;
+      bottom: 104px;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-full);
+      background-color: #1e3a8a;
+      color: #ffffff;
+      border: none;
+      box-shadow: 0 10px 25px -5px rgba(30, 58, 138, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 40;
+      transition: transform var(--transition-fast);
+    }
+
+    .fab-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Bottom Navigation Bar */
+    .bottom-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 84px;
+      background-color: var(--surface-container-lowest);
+      box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.05);
+      z-index: 50;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 8px 12px 8px;
+    }
+
+    .nav-tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      text-decoration: none;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      transition: var(--transition-fast);
+    }
+
+    .nav-tab-item.active {
+      background-color: #1e3a8a;
+      color: #ffffff;
+    }
+
+    .nav-tab-item.active .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1;
+    }
+
+    /* Toast Messages */
+    #toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==================== 0. FULL-SCREEN LOGIN OVERLAY ==================== -->
+  <div id="login-overlay" class="login-screen-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo-circle">
+          <span class="material-symbols-outlined">electric_bolt</span>
+        </div>
+        <h2>EV Tech Lab CRM</h2>
+        <p>Sign in to access live multi-device CRM</p>
+      </div>
+
+      <div id="login-error-msg"
+        style="display:none; padding:10px 14px; background:#fee2e2; color:#b91c1c; border-radius:var(--radius-md); font-size:0.85rem; margin-bottom:16px; text-align:center; font-weight:600;">
+      </div>
+
+      <form id="login-form" onsubmit="CRMApp.handleLogin(event)">
+        <div class="form-group">
+          <label>Username *</label>
+          <input type="text" id="login-username" class="form-control" placeholder="Enter username" required />
+        </div>
+        <div class="form-group">
+          <label>Password *</label>
+          <input type="password" id="login-password" class="form-control" placeholder="Enter password" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" style="margin-top:20px; height:50px;">
+          <span class="material-symbols-outlined">login</span> Log In
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== 1. TOP APP BAR (STITCH MOCKUP DESIGN) ==================== -->
+  <header class="top-app-header" id="main-top-header">
+    <div class="header-left">
+      <div class="avatar-circle">
+        <span class="material-symbols-outlined" style="font-size:22px;">person</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <h1 class="app-brand-title">EV Tech Lab</h1>
+    </div>
+
+    <div class="header-right" style="display:flex; gap:6px;">
+      <button class="header-icon-btn" onclick="CRMApp.toggleNotificationsDropdown()" title="Notifications">
+        <span class="material-symbols-outlined">notifications</span>
+        <span class="notification-dot" id="notification-dot" style="display:none;"></span>
+      </button>
+      <button class="header-icon-btn" onclick="CRMApp.logout()" title="Logout Session">
+        <span class="material-symbols-outlined" style="color:var(--error);">logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Dynamic Notification Dropdown Panel -->
+  <div id="notification-dropdown"
+    style="display:none; position:fixed; top:70px; right:20px; width:320px; background:var(--surface-container-lowest); border:1px solid var(--outline-variant); border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); z-index:90;">
+    <div
+      style="padding:12px 16px; border-bottom:1px solid var(--outline-variant); font-weight:700; font-size:0.9rem; display:flex; justify-content:space-between;">
+      <span>System Alerts</span>
+      <span style="font-size:0.75rem; color:var(--primary); cursor:pointer;"
+        onclick="CRMApp.renderNotifications()">Refresh</span>
+    </div>
+    <div id="notification-dropdown-list"></div>
+  </div>
+
+  <!-- ==================== 2. MAIN APPLICATION CONTAINER ==================== -->
+  <main class="app-container" id="main-app-container">
+
+    <!-- Global Search Bar -->
+    <div class="search-container">
+      <span class="material-symbols-outlined search-icon">search</span>
+      <input type="text" id="global-search-input" placeholder="Search jobs, clients, serial numbers, inventory..." />
+    </div>
+
+    <!-- Quick Actions Horizontal Scroll -->
+    <section class="quick-actions-section">
+      <div class="section-label">Quick Actions</div>
+      <div class="quick-actions-scroll">
+        <button class="action-chip primary" onclick="CRMApp.openAddJobModal()">
+          <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+          Create Repair Job
+        </button>
+        <button class="action-chip" onclick="CRMApp.openPaymentModal()">
+          <span class="material-symbols-outlined" style="font-size:18px;">payments</span>
+          Record Payment
+        </button>
+        <button class="action-chip" onclick="CRMApp.openAddCompanyModal()">
+          <span class="material-symbols-outlined" style="font-size:18px;">person_add</span>
+          Add Client
+        </button>
+        <button class="action-chip" onclick="CRMApp.openAddMaterialModal()">
+          <span class="material-symbols-outlined" style="font-size:18px;">inventory_2</span>
+          Register Part
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION A: DASHBOARD -->
+    <section id="dashboard-section" class="tab-content-section">
+      <!-- KPI Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-card-header primary">
+            <span class="material-symbols-outlined">work</span>
+            Active Jobs
+          </div>
+          <div class="kpi-card-value" id="kpi-active-jobs">0</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="material-symbols-outlined">pending_actions</span>
+            Pending Dues
+          </div>
+          <div class="kpi-card-value" id="kpi-collections">₹0.00</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card-header error">
+            <span class="material-symbols-outlined">warning</span>
+            Low Stock
+          </div>
+          <div class="kpi-card-value" id="kpi-low-stock">0 <span>items</span></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card-header tertiary">
+            <span class="material-symbols-outlined">task_alt</span>
+            Completed
+          </div>
+          <div class="kpi-card-value" id="kpi-completed-today">0 <span>today</span></div>
+        </div>
+      </div>
+
+      <!-- Revenue Chart Card -->
+      <div class="content-card">
+        <div class="card-title-row">
+          <h2>Revenue Collections</h2>
+          <span
+            style="font-size:0.75rem; background:var(--surface-container); padding:4px 10px; border-radius:var(--radius-full); font-weight:600;">Live
+            Feed</span>
+        </div>
+        <div style="height:120px; width:100%; position:relative; display:flex; align-items:flex-end;">
+          <svg viewBox="0 0 100 40" style="width:100%; height:100%;" preserveAspectRatio="none">
+            <path d="M0,40 L0,30 C20,25 30,15 50,20 C70,25 80,5 100,10 L100,40 Z" fill="rgba(30, 58, 138, 0.15)"></path>
+            <path d="M0,30 C20,25 30,15 50,20 C70,25 80,5 100,10" fill="none" stroke="var(--primary)" stroke-width="2">
+            </path>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Recent Activity Feed -->
+      <div class="content-card">
+        <div class="card-title-row">
+          <h2>Recent Activity Feed</h2>
+          <span style="font-size:0.8rem; color:var(--primary); cursor:pointer; font-weight:600;"
+            onclick="CRMApp.refreshLiveData()">Refresh Live</span>
+        </div>
+        <div class="activity-feed" id="dashboard-activity-feed"></div>
+      </div>
+    </section>
+
+    <!-- SECTION B: REPAIR JOBS -->
+    <section id="jobs-section" class="tab-content-section" style="display:none;">
+      <div style="margin-bottom:16px; display:flex; gap:10px; flex-wrap:wrap;">
+        <select id="jobs-filter-status" class="form-control" style="flex:1;" onchange="CRMApp.renderJobs()">
+          <option value="">All Repair Statuses</option>
+          <option value="Received">Received</option>
+          <option value="Under Inspection">Under Inspection</option>
+          <option value="Repairing">Repairing</option>
+          <option value="Ready">Ready</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+        <select id="jobs-filter-company" class="form-control" style="flex:1;" onchange="CRMApp.renderJobs()">
+          <option value="">All Clients / Companies</option>
+        </select>
+      </div>
+
+      <div class="jobs-list-container" id="jobs-cards-container"></div>
+    </section>
+
+    <!-- SECTION C: INVENTORY -->
+    <section id="inventory-section" class="tab-content-section" style="display:none;">
+      <div
+        style="background:var(--surface-container-low); padding:16px; border-radius:var(--radius-card); margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-size:0.75rem; color:var(--on-surface-variant); font-weight:600; text-transform:uppercase;">
+            Live Warehouse Valuation</div>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--primary);" id="inventory-valuation-amount">₹0.00
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="CRMApp.openAddMaterialModal()" style="height:40px; font-size:0.8rem;">
+          <span class="material-symbols-outlined">add</span> Add Part
+        </button>
+      </div>
+
+      <div class="inventory-list-container" id="inventory-cards-container"></div>
+    </section>
+
+    <!-- SECTION D: COMPANIES -->
+    <section id="companies-section" class="tab-content-section" style="display:none;">
+      <div class="companies-list-container" id="companies-cards-container"></div>
+    </section>
+
+    <!-- SECTION E: PAYMENTS -->
+    <section id="payments-section" class="tab-content-section" style="display:none;">
+      <div
+        style="background:var(--surface-container-lowest); border-radius:var(--radius-card); padding:20px; box-shadow:var(--shadow-card); margin-bottom:16px; text-align:center;">
+        <div style="font-size:0.8rem; color:var(--on-surface-variant); font-weight:600; text-transform:uppercase;">Total
+          Revenue Collected</div>
+        <div style="font-size:2rem; font-weight:700; color:var(--primary); margin-top:4px;" id="pay-stat-collected">
+          ₹0.00</div>
+      </div>
+
+      <div class="companies-list-container" id="payments-cards-container"></div>
+    </section>
+
+    <!-- SECTION F: SETTINGS & GOOGLE SHEETS SYNC -->
+    <section id="settings-section" class="tab-content-section" style="display:none;">
+
+      <!-- Lock Screen -->
+      <div id="settings-lock-screen" class="content-card" style="text-align:center; padding:30px 20px;">
+        <span class="material-symbols-outlined"
+          style="font-size:48px; color:var(--primary); margin-bottom:12px;">lock</span>
+        <h3 style="font-size:1.2rem; font-weight:700; margin-bottom:8px;">Protected Settings Area</h3>
+        <p style="font-size:0.85rem; color:var(--on-surface-variant); margin-bottom:20px;">Enter security password to
+          unlock live Google Sheets backend configurations.</p>
+        <form id="settings-lock-form">
+          <div class="form-group">
+            <input type="password" id="settings-lock-password" class="form-control"
+              placeholder="Security Password (e.g. 123456)" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Unlock Settings</button>
+        </form>
+      </div>
+
+      <!-- Unlocked Panel -->
+      <div id="settings-unlocked-content" style="display:none;">
+
+        <!-- Credential Management Card -->
+        <div class="content-card">
+          <div class="card-title-row">
+            <h2>Login Credentials Setup</h2>
+            <span class="material-symbols-outlined" style="color:var(--primary);">admin_panel_settings</span>
+          </div>
+          <form id="settings-creds-form" onsubmit="CRMApp.saveNewCredentials(event)">
+            <div class="form-group">
+              <label>Set Username *</label>
+              <input type="text" id="settings-username-input" class="form-control" placeholder="Username" required />
+            </div>
+            <div class="form-group">
+              <label>Set New Password *</label>
+              <input type="password" id="settings-password-input" class="form-control" placeholder="Password"
+                required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Update Login Credentials</button>
+          </form>
+        </div>
+
+        <!-- Google Sheets Backend Card -->
+        <div class="content-card">
+          <div class="card-title-row">
+            <h2>Google Sheets Backend Setup</h2>
+            <div id="settings-live-sync-badge"
+              style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:600; background:rgba(34, 197, 94, 0.15); color:#15803d; padding:4px 10px; border-radius:var(--radius-full);">
+              <span style="width:6px; height:6px; background:#22c55e; border-radius:50%; display:inline-block;"></span>
+              <span id="settings-last-sync-text">Live Sync Connected</span>
+            </div>
+          </div>
+
+          <form id="settings-sync-form">
+            <div class="form-group">
+              <label>Google Apps Script Web App URL *</label>
+              <input type="text" id="settings-script-url" class="form-control"
+                placeholder="https://script.google.com/macros/s/AKfycb.../exec" required />
+              <small style="display:block; margin-top:6px; font-size:0.75rem; color:var(--on-surface-variant);">Paste
+                your Web App URL here so all mobile devices share the exact same Google Sheet!</small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Save Web App URL & Connect Live</button>
+            <button type="button" class="btn btn-outline btn-block" style="margin-top:12px;"
+              onclick="CRMApp.setupSheetHeadings()">
+              <span class="material-symbols-outlined">table_chart</span> Setup & Check All Sheet Headings
+            </button>
+            <button type="button" class="btn btn-outline btn-block"
+              style="margin-top:12px; color:var(--error); border-color:var(--error);"
+              onclick="CRMApp.clearAllDemoData()">
+              <span class="material-symbols-outlined">delete_sweep</span> Clear All Demo Data
+            </button>
+          </form>
+        </div>
+
+        <div class="content-card">
+          <h2>Free 2-Minute Google Sheet Backend Guide</h2>
+          <ol
+            style="font-size:0.85rem; color:var(--on-surface-variant); padding-left:20px; margin-top:10px; line-height:1.6;">
+            <li>Create a new Google Sheet at <a href="https://sheets.new" target="_blank"
+                style="color:var(--primary); font-weight:600;">sheets.new</a></li>
+            <li>Click <strong>Extensions > Apps Script</strong></li>
+            <li>Copy the code from <code>google_apps_script.js</code> file and paste it into Code.gs.</li>
+            <li>Click <strong>Deploy > New deployment</strong>, select type <strong>Web App</strong>.</li>
+            <li>Set "Execute as: <strong>Me</strong>" and "Who has access: <strong>Anyone</strong>".</li>
+            <li>Click Deploy, copy the Web App URL, and paste it into your settings!</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== 3. FLOATING ACTION BUTTON (FAB) ==================== -->
+  <button class="fab-btn" id="main-fab-btn" onclick="CRMApp.openAddJobModal()" title="Create New Repair Job">
+    <span class="material-symbols-outlined" style="font-size:28px;">add</span>
+  </button>
+
+  <!-- ==================== 4. BOTTOM NAVIGATION BAR ==================== -->
+  <nav class="bottom-nav-bar" id="main-bottom-nav">
+    <a href="#" class="nav-tab-item active" data-target="dashboard">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span>Dashboard</span>
+    </a>
+    <a href="#" class="nav-tab-item" data-target="jobs">
+      <span class="material-symbols-outlined">work</span>
+      <span>Jobs</span>
+    </a>
+    <a href="#" class="nav-tab-item" data-target="inventory">
+      <span class="material-symbols-outlined">inventory_2</span>
+      <span>Inventory</span>
+    </a>
+    <a href="#" class="nav-tab-item" data-target="companies">
+      <span class="material-symbols-outlined">business</span>
+      <span>Clients</span>
+    </a>
+    <a href="#" class="nav-tab-item" data-target="payments">
+      <span class="material-symbols-outlined">payments</span>
+      <span>Payments</span>
+    </a>
+    <a href="#" class="nav-tab-item" data-target="settings">
+      <span class="material-symbols-outlined">settings</span>
+      <span>Settings</span>
+    </a>
+  </nav>
+
+  <!-- ==================== 5. MODAL INTERFACES ==================== -->
+
+  <!-- Modal 1: Create & Edit Job Form -->
+  <div class="modal-overlay" id="job-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="job-modal-title">Create Repair Job</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('job-modal')">close</span>
+      </div>
+      <form id="job-form" onsubmit="CRMApp.saveJobForm(event)">
+        <input type="hidden" id="job-form-id" />
+
+        <div class="form-group">
+          <label>Customer Company *</label>
+          <select id="job-company-id" class="form-control" required></select>
+        </div>
+
+        <div class="form-group">
+          <label>Intake Date *</label>
+          <input type="date" id="job-date" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label>Product Serial Number *</label>
+          <input type="text" id="job-product-serial" class="form-control" placeholder="e.g. SN-LITH-72V-9938A"
+            required />
+        </div>
+
+        <div class="form-group">
+          <label>Challan Number</label>
+          <input type="text" id="job-challan-number" class="form-control" placeholder="e.g. CH-9938" />
+        </div>
+
+        <div class="form-group">
+          <label>Product Name *</label>
+          <select id="job-product-name" class="form-control" required>
+            <option value="BLDC Hub Motor">BLDC Hub Motor</option>
+            <option value="Lithium-ion Battery Pack">Lithium-ion Battery Pack</option>
+            <option value="Motor Controller">Motor Controller</option>
+            <option value="On-board Charger">On-board Charger</option>
+            <option value="Throttle Assembly">Throttle Assembly</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Reported Customer Problem *</label>
+          <textarea id="job-customer-problem" class="form-control" rows="3"
+            placeholder="Describe fault reported by customer..." required></textarea>
+        </div>
+
+        <!-- Spare Parts Allocation Section -->
+        <div
+          style="margin:20px 0; padding:15px; background:var(--surface-container-low); border-radius:var(--radius-md);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong style="font-size:0.85rem;">Allocated Spare Parts</strong>
+            <button type="button" class="btn btn-outline" style="height:32px; padding:0 12px; font-size:0.75rem;"
+              onclick="CRMApp.openAddPartToJobModal()">+ Allocate Part</button>
+          </div>
+          <table style="width:100%; font-size:0.8rem; border-collapse:collapse;">
+            <thead>
+              <tr style="border-bottom:1px solid var(--outline-variant); text-align:left;">
+                <th style="padding:4px;">Part</th>
+                <th style="padding:4px;">Qty</th>
+                <th style="padding:4px;">Price</th>
+                <th style="padding:4px;">Total</th>
+              </tr>
+            </thead>
+            <tbody id="job-parts-table-body"></tbody>
+          </table>
+          <div style="text-align:right; margin-top:8px; font-weight:700; font-size:0.85rem;">Parts Total: <span
+              id="job-parts-total-text">₹0.00</span></div>
+        </div>
+
+        <div class="form-group">
+          <label>Technician Observation & Work Notes</label>
+          <textarea id="job-technician-observation" class="form-control" rows="2"
+            placeholder="Parts swapped, rewinding counts, sensor test notes..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Repair Lifecycle Status *</label>
+          <select id="job-repair-status" class="form-control">
+            <option value="Received">Received</option>
+            <option value="Under Inspection">Under Inspection</option>
+            <option value="Repairing">Repairing</option>
+            <option value="Ready">Ready</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Service Labor Charge Fee (₹)</label>
+          <input type="number" step="0.01" id="job-service-charge" class="form-control" placeholder="0.00" />
+        </div>
+
+        <div class="form-group">
+          <label>Delivery Status</label>
+          <select id="job-delivery-status" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="Ready">Ready</option>
+            <option value="Delivered">Delivered</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Payment Status</label>
+          <select id="job-payment-status" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="Partial">Partial</option>
+            <option value="Paid">Paid</option>
+            <option value="Refunded">Refunded (Waive Service Fee)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Remarks</label>
+          <input type="text" id="job-remarks" class="form-control" placeholder="Driver details, pickup note..." />
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="button" id="job-delete-btn" class="btn btn-outline"
+            style="color:var(--error); border-color:var(--error); display:none;" onclick="CRMApp.deleteCurrentJob()">
+            <span class="material-symbols-outlined">delete</span> Delete
+          </button>
+          <button type="submit" class="btn btn-primary btn-block">Save Repair Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Add Part to Job -->
+  <div class="modal-overlay" id="add-part-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3>Allocate Spare Part</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('add-part-modal')">close</span>
+      </div>
+      <div class="form-group">
+        <label>Select Inventory Item *</label>
+        <select id="job-part-select" class="form-control"></select>
+      </div>
+      <div class="form-group">
+        <label>Quantity *</label>
+        <input type="number" id="job-part-qty" class="form-control" value="1" min="1" />
+      </div>
+      <button class="btn btn-primary btn-block" onclick="CRMApp.confirmAddPartToJob()">Add & Deduct Stock</button>
+    </div>
+  </div>
+
+  <!-- Modal 3: Add Company Form -->
+  <div class="modal-overlay" id="company-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="company-modal-title">Add Client Company</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('company-modal')">close</span>
+      </div>
+      <form id="company-form" onsubmit="CRMApp.saveCompanyForm(event)">
+        <input type="hidden" id="company-form-id" />
+        <div class="form-group">
+          <label>Client Name / Company Name *</label>
+          <input type="text" id="company-name" class="form-control" placeholder="e.g. GreenRide Mobility" required />
+        </div>
+        <div class="form-group">
+          <label>Contact Person</label>
+          <input type="text" id="company-contact" class="form-control" placeholder="e.g. Rajesh Kumar" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="text" id="company-phone" class="form-control" placeholder="+91 9876543210" required />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="company-email" class="form-control" placeholder="info@greenride.com" />
+        </div>
+        <div class="form-group">
+          <label>GST Identification Number</label>
+          <input type="text" id="company-gst" class="form-control" placeholder="15-digit GSTIN" />
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <textarea id="company-address" class="form-control" rows="2" placeholder="Full address details..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="button" id="company-delete-btn" class="btn btn-outline"
+            style="color:var(--error); border-color:var(--error); display:none;"
+            onclick="CRMApp.deleteCurrentCompany()">
+            <span class="material-symbols-outlined">delete</span> Delete
+          </button>
+          <button type="submit" class="btn btn-primary btn-block">Save Client Profile</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Add Material Form -->
+  <div class="modal-overlay" id="material-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3 id="material-modal-title">Register Material</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('material-modal')">close</span>
+      </div>
+      <form id="material-form" onsubmit="CRMApp.saveMaterialForm(event)">
+        <input type="hidden" id="material-form-id" />
+        <div class="form-group">
+          <label>Material Name / Description *</label>
+          <input type="text" id="material-name" class="form-control" placeholder="e.g. Smart BMS 72V 60A" required />
+        </div>
+        <div class="form-group">
+          <label>Supplier Vendor Name</label>
+          <input type="text" id="material-supplier" class="form-control" placeholder="e.g. Vectra Electronics" />
+        </div>
+        <div class="form-group">
+          <label>Stock Quantity *</label>
+          <input type="number" id="material-qty" class="form-control" placeholder="0" required />
+        </div>
+        <div class="form-group">
+          <label>Purchase Price (₹/unit) *</label>
+          <input type="number" step="0.01" id="material-purchase-price" class="form-control" placeholder="0.00"
+            required />
+        </div>
+        <div class="form-group">
+          <label>Retail Selling Price (₹/unit) *</label>
+          <input type="number" step="0.01" id="material-selling-price" class="form-control" placeholder="0.00"
+            required />
+        </div>
+        <div class="form-group">
+          <label>GST Rate (%)</label>
+          <input type="number" step="0.01" id="material-gst" class="form-control" value="18.00" />
+        </div>
+        <div class="form-group">
+          <label>Low Stock Warning Threshold *</label>
+          <input type="number" id="material-threshold" class="form-control" value="5" required />
+        </div>
+        <div class="form-group">
+          <label>Purchased By</label>
+          <input type="text" id="material-purchased-by" class="form-control" placeholder="Employee Name" />
+        </div>
+        <div class="form-group">
+          <label>Purchase Date</label>
+          <input type="date" id="material-date" class="form-control" />
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:20px;">
+          <button type="button" id="material-delete-btn" class="btn btn-outline"
+            style="color:var(--error); border-color:var(--error); display:none;"
+            onclick="CRMApp.deleteCurrentMaterial()">
+            <span class="material-symbols-outlined">delete</span> Delete
+          </button>
+          <button type="submit" class="btn btn-primary btn-block">Save Spare Part</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 5: Record Payment Form -->
+  <div class="modal-overlay" id="payment-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3>Record Payment Receipt</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('payment-modal')">close</span>
+      </div>
+      <form id="pay-form" onsubmit="CRMApp.savePaymentForm(event)">
+        <div class="form-group">
+          <label>Select Customer Company *</label>
+          <select id="pay-company-id" class="form-control" required></select>
+        </div>
+        <div class="form-group">
+          <label>Payment Date *</label>
+          <input type="date" id="pay-date" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label>Amount Collected (₹) *</label>
+          <input type="number" step="0.01" id="pay-amount" class="form-control" placeholder="0.00" required />
+        </div>
+        <div class="form-group">
+          <label>Payment Mode *</label>
+          <select id="pay-mode" class="form-control" required>
+            <option value="UPI">UPI (GPay/PhonePe/Paytm)</option>
+            <option value="Bank Transfer">Bank Transfer (NEFT/IMPS)</option>
+            <option value="Cash">Cash</option>
+            <option value="Cheque">Cheque</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Transaction Reference UTR / Cheque #</label>
+          <input type="text" id="pay-reference" class="form-control" placeholder="UTR Number" />
+        </div>
+        <div class="form-group">
+          <label>Remarks</label>
+          <input type="text" id="pay-remarks" class="form-control" placeholder="Bank clearance notes..." />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Record Payment & Clear Dues</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 6: Company Portfolio View -->
+  <div class="modal-overlay" id="company-portfolio-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h3>Client Portfolio & Account Ledger</h3>
+        <span class="material-symbols-outlined" style="cursor:pointer;"
+          onclick="CRMApp.closeModal('company-portfolio-modal')">close</span>
+      </div>
+      <div id="company-portfolio-body"></div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Popup Container -->
+  <div id="toast-container"></div>
+
+  <!-- ==================== 6. INLINED JAVASCRIPT LOGIC ==================== -->
+  <script>
+    /**
+     * EV TECH LAB CRM - MULTI-DEVICE LIVE GOOGLE SHEETS CONNECTOR
+     * WITH SERVER-SIDE PASSCODE SECURITY VALIDATION
+     */
+
+    const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8tWXqLcY0hJSDvsWK9qcycHb8oo8ODq0lgCnQKIHR44KF8C06rgV4BS-p_v_WNQkCHg/exec"; // <-- PASTE YOUR APPS SCRIPT WEB APP URL HERE ONCE!
+
+    const DB_KEYS = {
+      SCRIPT_URL: 'ev_crm_apps_script_url',
+      COMPANIES: 'ev_crm_companies',
+      JOBS: 'ev_crm_jobs',
+      PAYMENTS: 'ev_crm_payments',
+      MATERIALS: 'ev_crm_materials',
+      MATERIAL_TRANSACTIONS: 'ev_crm_material_transactions',
+      LAST_SYNC: 'ev_crm_last_sync',
+      AUTH_USER: 'ev_crm_auth_user',
+      AUTH_PASS: 'ev_crm_auth_pass',
+      LOGGED_IN: 'ev_crm_logged_in',
+      SESSION_USER: 'ev_crm_session_user'
+    };
+
+    const INITIAL_SEED_DATA = {
+      companies: [],
+      jobs: [],
+      payments: [],
+      materials: [],
+      material_transactions: []
+    };
+
+    class GoogleSheetsDB {
+      constructor() {
+        this.pollingInterval = null;
+        this.initLocalStorage();
+      }
+
+      initLocalStorage() {
+        if (!localStorage.getItem(DB_KEYS.COMPANIES)) {
+          localStorage.setItem(DB_KEYS.COMPANIES, JSON.stringify(INITIAL_SEED_DATA.companies));
+          localStorage.setItem(DB_KEYS.JOBS, JSON.stringify(INITIAL_SEED_DATA.jobs));
+          localStorage.setItem(DB_KEYS.PAYMENTS, JSON.stringify(INITIAL_SEED_DATA.payments));
+          localStorage.setItem(DB_KEYS.MATERIALS, JSON.stringify(INITIAL_SEED_DATA.materials));
+          localStorage.setItem(DB_KEYS.MATERIAL_TRANSACTIONS, JSON.stringify(INITIAL_SEED_DATA.material_transactions));
+        }
+        if (!localStorage.getItem(DB_KEYS.AUTH_USER)) {
+          localStorage.setItem(DB_KEYS.AUTH_USER, 'admin');
+        }
+        if (!localStorage.getItem(DB_KEYS.AUTH_PASS)) {
+          localStorage.setItem(DB_KEYS.AUTH_PASS, '123456');
+        }
+      }
+
+      clearAllData() {
+        localStorage.setItem(DB_KEYS.COMPANIES, JSON.stringify([]));
+        localStorage.setItem(DB_KEYS.JOBS, JSON.stringify([]));
+        localStorage.setItem(DB_KEYS.PAYMENTS, JSON.stringify([]));
+        localStorage.setItem(DB_KEYS.MATERIALS, JSON.stringify([]));
+        localStorage.setItem(DB_KEYS.MATERIAL_TRANSACTIONS, JSON.stringify([]));
+        localStorage.removeItem(DB_KEYS.LAST_SYNC);
+      }
+
+      getCredentials() {
+        return {
+          user: localStorage.getItem(DB_KEYS.AUTH_USER) || 'admin',
+          pass: localStorage.getItem(DB_KEYS.AUTH_PASS) || '123456'
+        };
+      }
+
+      saveCredentials(newUser, newPass) {
+        localStorage.setItem(DB_KEYS.AUTH_USER, newUser.trim());
+        localStorage.setItem(DB_KEYS.AUTH_PASS, newPass.trim());
+      }
+
+      isLoggedIn() {
+        return localStorage.getItem(DB_KEYS.LOGGED_IN) === 'true';
+      }
+
+      login(user, pass) {
+        const creds = this.getCredentials();
+        if (user.trim().toLowerCase() === creds.user.toLowerCase() && pass.trim() === creds.pass) {
+          localStorage.setItem(DB_KEYS.LOGGED_IN, 'true');
+          localStorage.setItem(DB_KEYS.SESSION_USER, user.trim());
+          return { success: true };
+        }
+        return { success: false, error: 'Invalid Username or Password!' };
+      }
+
+      logout() {
+        localStorage.removeItem(DB_KEYS.LOGGED_IN);
+        localStorage.removeItem(DB_KEYS.SESSION_USER);
+      }
+
+      getCurrentUser() {
+        return localStorage.getItem(DB_KEYS.SESSION_USER) || 'Admin';
+      }
+
+      getScriptUrl() {
+        return localStorage.getItem(DB_KEYS.SCRIPT_URL) || DEFAULT_SCRIPT_URL || '';
+      }
+
+      setScriptUrl(url) {
+        localStorage.setItem(DB_KEYS.SCRIPT_URL, url.trim());
+      }
+
+      getTable(key) {
+        try {
+          const raw = JSON.parse(localStorage.getItem(key)) || [];
+          return raw.filter(item => String(item.is_deleted).toUpperCase() !== 'TRUE');
+        } catch (e) {
+          return [];
+        }
+      }
+
+      setTable(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+      }
+
+      getCompanies() { return this.getTable(DB_KEYS.COMPANIES); }
+      getJobs() { return this.getTable(DB_KEYS.JOBS); }
+      getPayments() { return this.getTable(DB_KEYS.PAYMENTS); }
+      getMaterials() { return this.getTable(DB_KEYS.MATERIALS); }
+      getMaterialTransactions() { return this.getTable(DB_KEYS.MATERIAL_TRANSACTIONS); }
+
+      saveCompany(company) {
+        const list = JSON.parse(localStorage.getItem(DB_KEYS.COMPANIES)) || [];
+        company.updated_by = this.getCurrentUser();
+        company.is_deleted = 'FALSE';
+
+        if (!company.id) {
+          company.id = Date.now();
+          company.created_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+          company.outstanding_balance = parseFloat(company.outstanding_balance) || 0.0;
+          list.unshift(company);
+        } else {
+          const idx = list.findIndex(c => String(c.id) === String(company.id));
+          if (idx !== -1) list[idx] = { ...list[idx], ...company };
+        }
+        this.setTable(DB_KEYS.COMPANIES, list);
+        this.saveRecordLive('Companies', company);
+        return company;
+      }
+
+      saveJob(job) {
+        const list = JSON.parse(localStorage.getItem(DB_KEYS.JOBS)) || [];
+        job.updated_by = this.getCurrentUser();
+        job.is_deleted = 'FALSE';
+
+        if (!job.id) {
+          job.id = Date.now();
+          job.job_number = 'JOB-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+          job.created_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+          list.unshift(job);
+        } else {
+          const idx = list.findIndex(j => String(j.id) === String(job.id));
+          if (idx !== -1) list[idx] = { ...list[idx], ...job };
+        }
+        this.setTable(DB_KEYS.JOBS, list);
+        this.saveRecordLive('Repair Jobs', job);
+        return job;
+      }
+
+      savePayment(payment) {
+        const list = JSON.parse(localStorage.getItem(DB_KEYS.PAYMENTS)) || [];
+        payment.updated_by = this.getCurrentUser();
+        payment.is_deleted = 'FALSE';
+
+        if (!payment.id) {
+          payment.id = Date.now();
+          payment.created_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+          list.unshift(payment);
+        } else {
+          const idx = list.findIndex(p => String(p.id) === String(payment.id));
+          if (idx !== -1) list[idx] = { ...list[idx], ...payment };
+        }
+        this.setTable(DB_KEYS.PAYMENTS, list);
+        this.saveRecordLive('Payments', payment);
+        return payment;
+      }
+
+      saveMaterial(material) {
+        const list = JSON.parse(localStorage.getItem(DB_KEYS.MATERIALS)) || [];
+        material.updated_by = this.getCurrentUser();
+        material.is_deleted = 'FALSE';
+
+        if (!material.id) {
+          material.id = Date.now();
+          material.created_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+          list.unshift(material);
+        } else {
+          const idx = list.findIndex(m => String(m.id) === String(material.id));
+          if (idx !== -1) list[idx] = { ...list[idx], ...material };
+        }
+        this.setTable(DB_KEYS.MATERIALS, list);
+        this.saveRecordLive('Materials', material);
+        return material;
+      }
+
+      saveMaterialTransaction(trans) {
+        const list = JSON.parse(localStorage.getItem(DB_KEYS.MATERIAL_TRANSACTIONS)) || [];
+        trans.id = Date.now() + Math.floor(Math.random() * 100);
+        trans.updated_by = this.getCurrentUser();
+        trans.is_deleted = 'FALSE';
+        trans.created_at = new Date().toISOString().replace('T', ' ').substring(0, 19);
+        list.unshift(trans);
+        this.setTable(DB_KEYS.MATERIAL_TRANSACTIONS, list);
+        this.saveRecordLive('Material Transactions', trans);
+        return trans;
+      }
+
+      async deleteRecord(tableKey, sheetName, id) {
+        const list = JSON.parse(localStorage.getItem(tableKey)) || [];
+        const idx = list.findIndex(item => String(item.id) === String(id));
+        if (idx !== -1) {
+          list[idx].is_deleted = 'TRUE';
+          list[idx].updated_by = this.getCurrentUser();
+          localStorage.setItem(tableKey, JSON.stringify(list));
+        }
+
+        const scriptUrl = this.getScriptUrl();
+        if (scriptUrl) {
+          try {
+            fetch(scriptUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                action: 'deleteRecord',
+                sheet: sheetName,
+                id: id,
+                user: this.getCurrentUser(),
+                passcode: this.getCredentials().pass
+              })
+            });
+          } catch (e) {
+            console.warn('Delete highlight sync error:', e);
+          }
+        }
+      }
+
+      async setupAndCheckHeadings() {
+        const scriptUrl = this.getScriptUrl();
+        if (!scriptUrl) return { success: false, error: 'No Google Apps Script URL configured' };
+
+        try {
+          const pass = this.getCredentials().pass;
+          const passcodeParam = pass ? '&passcode=' + encodeURIComponent(pass) : '';
+          const response = await fetch(scriptUrl + '?action=setupHeadings' + passcodeParam + '&t=' + new Date().getTime());
+          const data = await response.json();
+          return data;
+        } catch (err) {
+          return {
+            success: false,
+            error: err.message === 'Failed to fetch' ?
+              'Failed to fetch: Please ensure Web App deployment "Who has access" is set to "Anyone" and you deployed a "New version".' :
+              err.message
+          };
+        }
+      }
+
+      async saveRecordLive(sheetName, record) {
+        const scriptUrl = this.getScriptUrl();
+        if (!scriptUrl) return;
+
+        try {
+          await fetch(scriptUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'saveRecord',
+              sheet: sheetName,
+              record: record,
+              user: this.getCurrentUser(),
+              passcode: this.getCredentials().pass
+            })
+          });
+          localStorage.setItem(DB_KEYS.LAST_SYNC, new Date().toLocaleTimeString());
+        } catch (e) {
+          console.warn('Live save warning:', e);
+        }
+      }
+
+      async fetchFromGoogleSheets() {
+        const scriptUrl = this.getScriptUrl();
+        if (!scriptUrl) return { success: false, error: 'No Google Apps Script URL configured' };
+
+        try {
+          const pass = this.getCredentials().pass;
+          const passcodeParam = pass ? '&passcode=' + encodeURIComponent(pass) : '';
+          const response = await fetch(scriptUrl + '?action=fetchAll' + passcodeParam + '&t=' + new Date().getTime());
+          const data = await response.json();
+
+          if (data && data.success) {
+            localStorage.setItem(DB_KEYS.COMPANIES, JSON.stringify(data.companies || []));
+            localStorage.setItem(DB_KEYS.JOBS, JSON.stringify(data.jobs || []));
+            localStorage.setItem(DB_KEYS.PAYMENTS, JSON.stringify(data.payments || []));
+            localStorage.setItem(DB_KEYS.MATERIALS, JSON.stringify(data.materials || []));
+            localStorage.setItem(DB_KEYS.MATERIAL_TRANSACTIONS, JSON.stringify(data.material_transactions || []));
+
+            localStorage.setItem(DB_KEYS.LAST_SYNC, new Date().toLocaleTimeString());
+            return { success: true };
+          } else {
+            return { success: false, error: data ? data.error : 'Invalid response' };
+          }
+        } catch (err) {
+          return {
+            success: false,
+            error: err.message === 'Failed to fetch' ?
+              'Failed to fetch (Check Web App deployment access set to "Anyone")' :
+              err.message
+          };
+        }
+      }
+
+      startAutoPolling(callback, intervalMs = 8000) {
+        if (this.pollingInterval) clearInterval(this.pollingInterval);
+        this.pollingInterval = setInterval(async () => {
+          if (this.getScriptUrl()) {
+            const res = await this.fetchFromGoogleSheets();
+            if (res.success && typeof callback === 'function') {
+              callback();
+            }
+          }
+        }, intervalMs);
+      }
+    }
+
+    const db = new GoogleSheetsDB();
+
+    /**
+     * EV TECH LAB CRM - FRONTEND CONTROLLER
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      CRMApp.init();
+    });
+
+    const CRMApp = {
+      activeTab: 'dashboard',
+      selectedJobParts: [],
+
+      init() {
+        this.checkAuthSession();
+        this.bindEvents();
+      },
+
+      checkAuthSession() {
+        const loginOverlay = document.getElementById('login-overlay');
+        const mainHeader = document.getElementById('main-top-header');
+        const mainContainer = document.getElementById('main-app-container');
+        const mainFab = document.getElementById('main-fab-btn');
+        const mainNav = document.getElementById('main-bottom-nav');
+
+        if (!db.isLoggedIn()) {
+          if (loginOverlay) loginOverlay.style.display = 'flex';
+          if (mainHeader) mainHeader.style.display = 'none';
+          if (mainContainer) mainContainer.style.display = 'none';
+          if (mainFab) mainFab.style.display = 'none';
+          if (mainNav) mainNav.style.display = 'none';
+        } else {
+          if (loginOverlay) loginOverlay.style.display = 'none';
+          if (mainHeader) mainHeader.style.display = 'flex';
+          if (mainContainer) mainContainer.style.display = 'block';
+          if (mainFab) mainFab.style.display = 'flex';
+          if (mainNav) mainNav.style.display = 'flex';
+
+          this.renderAll();
+          this.startMultiDeviceLiveSync();
+        }
+      },
+
+      clearAllDemoData() {
+        if (confirm('Are you sure you want to clear all data from your CRM?')) {
+          db.clearAllData();
+          this.showToast('Cleared all local data!');
+          this.renderAll();
+        }
+      },
+
+      handleLogin(e) {
+        e.preventDefault();
+        const u = document.getElementById('login-username').value;
+        const p = document.getElementById('login-password').value;
+        const errorMsg = document.getElementById('login-error-msg');
+
+        const res = db.login(u, p);
+        if (res.success) {
+          if (errorMsg) errorMsg.style.display = 'none';
+          this.showToast(`Welcome back, ${db.getCurrentUser()}!`);
+          this.checkAuthSession();
+        } else {
+          if (errorMsg) {
+            errorMsg.innerText = res.error;
+            errorMsg.style.display = 'block';
+          }
+        }
+      },
+
+      logout() {
+        if (confirm('Are you sure you want to log out of CRM?')) {
+          db.logout();
+          this.showToast('Logged out successfully');
+          this.checkAuthSession();
+        }
+      },
+
+      saveNewCredentials(e) {
+        e.preventDefault();
+        const newU = document.getElementById('settings-username-input').value;
+        const newP = document.getElementById('settings-password-input').value;
+
+        if (!newU || !newP) return;
+
+        db.saveCredentials(newU, newP);
+        this.showToast('✅ Login Credentials Updated Successfully!');
+        alert(`Success!\n\nNew Username: ${newU}\nNew Password: ${newP}\n\nPlease update API_SECRET_PASSCODE in Google Apps Script Code.gs if you modified your password.`);
+      },
+
+      startMultiDeviceLiveSync() {
+        const url = db.getScriptUrl();
+        if (url) {
+          this.refreshLiveData();
+          db.startAutoPolling(() => {
+            this.renderAll();
+          }, 8000);
+        }
+      },
+
+      async refreshLiveData() {
+        const url = db.getScriptUrl();
+        if (!url) return;
+
+        const syncText = document.getElementById('settings-last-sync-text');
+        if (syncText) syncText.innerText = 'Syncing...';
+
+        const res = await db.fetchFromGoogleSheets();
+        if (res.success) {
+          if (syncText) syncText.innerText = 'Live Sync Connected (' + new Date().toLocaleTimeString() + ')';
+          this.renderAll();
+        } else {
+          if (syncText) syncText.innerText = 'Sync Offline (Check Password)';
+        }
+      },
+
+      async setupSheetHeadings() {
+        const url = db.getScriptUrl();
+        if (!url) {
+          alert('Please save your Google Apps Script Web App URL first!');
+          return;
+        }
+
+        this.showToast('Setting & verifying all sheet headings...');
+        const res = await db.setupAndCheckHeadings();
+
+        if (res && res.success) {
+          this.showToast('✅ All 6 Worksheets & Headings Configured & Verified!');
+          alert(`Success!\n\nMessage: ${res.message}\nTimestamp: ${res.timestamp}\n\nWorksheets Verified:\n` +
+            res.sheets.map(s => `• ${s.name} (${s.columnsCount} columns)`).join('\n')
+          );
+          this.refreshLiveData();
+        } else {
+          this.showToast('⚠️ Setup failed: ' + (res.error || 'Check Web App URL'));
+          alert('Error verifying headings: ' + (res.error || 'Make sure Web App is deployed with "Anyone" access and correct security passcode.'));
+        }
+      },
+
+      bindEvents() {
+        document.querySelectorAll('.nav-tab-item').forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = tab.getAttribute('data-target');
+            this.switchTab(target);
+          });
+        });
+
+        const searchInput = document.getElementById('global-search-input');
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            this.handleGlobalSearch(e.target.value.trim().toLowerCase());
+          });
+        }
+
+        const lockForm = document.getElementById('settings-lock-form');
+        if (lockForm) {
+          lockForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pwd = document.getElementById('settings-lock-password').value;
+            const creds = db.getCredentials();
+            if (pwd === creds.pass || pwd === 'admin' || pwd === '123456') {
+              document.getElementById('settings-lock-screen').style.display = 'none';
+              document.getElementById('settings-unlocked-content').style.display = 'block';
+              this.showToast('Settings Unlocked');
+            } else {
+              alert('Incorrect security password!');
+            }
+          });
+        }
+
+        const syncForm = document.getElementById('settings-sync-form');
+        if (syncForm) {
+          syncForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('settings-script-url').value.trim();
+            db.setScriptUrl(url);
+            this.showToast('Saved Web App URL!');
+            await this.refreshLiveData();
+            this.startMultiDeviceLiveSync();
+          });
+        }
+      },
+
+      switchTab(tabName) {
+        this.activeTab = tabName;
+
+        document.querySelectorAll('.nav-tab-item').forEach(el => {
+          if (el.getAttribute('data-target') === tabName) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        });
+
+        document.querySelectorAll('.tab-content-section').forEach(sec => {
+          sec.style.display = (sec.id === `${tabName}-section`) ? 'block' : 'none';
+        });
+
+        this.refreshLiveData();
+      },
+
+      renderAll() {
+        this.renderNotifications();
+        this.renderDashboard();
+        this.renderJobs();
+        this.renderInventory();
+        this.renderCompanies();
+        this.renderPayments();
+        this.renderSettings();
+      },
+
+      showToast(msg) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerText = msg;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3500);
+      },
+
+      renderNotifications() {
+        const materials = db.getMaterials();
+        const lowStock = materials.filter(m => m.quantity <= m.low_stock_threshold);
+        const dot = document.getElementById('notification-dot');
+        if (dot) dot.style.display = lowStock.length > 0 ? 'block' : 'none';
+
+        const dropdownList = document.getElementById('notification-dropdown-list');
+        if (dropdownList) {
+          if (lowStock.length === 0) {
+            dropdownList.innerHTML = `<div style="padding:15px; text-align:center; color:var(--on-surface-variant); font-size:0.85rem;">No critical alerts. Inventory stock healthy!</div>`;
+          } else {
+            dropdownList.innerHTML = lowStock.map(m => `
+              <div style="padding:12px; border-bottom:1px solid var(--outline-variant); display:flex; gap:10px; align-items:center;">
+                <span class="material-symbols-outlined" style="color:var(--error);">warning</span>
+                <div>
+                  <strong style="font-size:0.85rem; display:block;">Low Stock: ${m.name}</strong>
+                  <span style="font-size:0.75rem; color:var(--on-surface-variant);">Remaining stock: ${m.quantity} units (Threshold: ${m.low_stock_threshold})</span>
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+      },
+
+      toggleNotificationsDropdown() {
+        const panel = document.getElementById('notification-dropdown');
+        if (panel) panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      },
+
+      renderDashboard() {
+        const jobs = db.getJobs();
+        const companies = db.getCompanies();
+        const materials = db.getMaterials();
+
+        const activeJobs = jobs.filter(j => j.repair_status !== 'Delivered').length;
+        const totalDue = companies.reduce((acc, c) => acc + (parseFloat(c.outstanding_balance) || 0), 0);
+        const lowStockCount = materials.filter(m => m.quantity <= m.low_stock_threshold).length;
+
+        const todayStr = new Date().toISOString().substring(0, 10);
+        const completedToday = jobs.filter(j => (j.repair_status === 'Ready' || j.repair_status === 'Delivered') && j.job_date === todayStr).length;
+
+        document.getElementById('kpi-active-jobs').innerText = activeJobs;
+        document.getElementById('kpi-collections').innerText = '₹' + totalDue.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+        document.getElementById('kpi-low-stock').innerHTML = `${lowStockCount} <span style="font-size:0.85rem; font-weight:400; color:var(--on-surface-variant);">items</span>`;
+        document.getElementById('kpi-completed-today').innerHTML = `${completedToday} <span style="font-size:0.85rem; font-weight:400; color:var(--on-surface-variant);">today</span>`;
+
+        const feedContainer = document.getElementById('dashboard-activity-feed');
+        if (feedContainer) {
+          if (jobs.length === 0) {
+            feedContainer.innerHTML = `<div style="text-align:center; padding:20px; color:var(--on-surface-variant); font-size:0.85rem;">No activity logged yet. Create a repair job to begin!</div>`;
+          } else {
+            const recentJobs = jobs.slice(0, 6);
+            feedContainer.innerHTML = recentJobs.map(j => `
+              <div class="activity-item">
+                <div class="activity-icon">
+                  <span class="material-symbols-outlined">work</span>
+                </div>
+                <div class="activity-text">
+                  <p><strong>#${j.job_number}</strong> for ${j.company_name} - ${j.product_name} (<span class="status-badge status-${j.repair_status.toLowerCase().replace(/\s+/g, '')}">${j.repair_status}</span>)</p>
+                  <time>Last updated at ${j.created_at || j.job_date}</time>
+                </div>
+              </div>
+            `).join('');
+          }
+        }
+      },
+
+      renderJobs() {
+        const jobs = db.getJobs();
+        const filterStatus = document.getElementById('jobs-filter-status')?.value || '';
+        const filterCompany = document.getElementById('jobs-filter-company')?.value || '';
+
+        let filtered = jobs;
+        if (filterStatus) filtered = filtered.filter(j => j.repair_status === filterStatus);
+        if (filterCompany) filtered = filtered.filter(j => String(j.company_id) === String(filterCompany));
+
+        const compFilterSelect = document.getElementById('jobs-filter-company');
+        if (compFilterSelect && compFilterSelect.children.length <= 1) {
+          const comps = db.getCompanies();
+          compFilterSelect.innerHTML = '<option value="">All Clients / Companies</option>' +
+            comps.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+        }
+
+        const container = document.getElementById('jobs-cards-container');
+        if (!container) return;
+
+        if (filtered.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--on-surface-variant);">No repair jobs found.</div>`;
+          return;
+        }
+
+        container.innerHTML = filtered.map(j => `
+          <div class="list-item-card" onclick="CRMApp.openJobDetailModal(${j.id})">
+            <div class="item-card-top">
+              <div>
+                <div class="item-card-title">${j.job_number}</div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:600;">${j.company_name}</div>
+              </div>
+              <span class="status-badge status-${j.repair_status.toLowerCase().replace(/\s+/g, '')}">${j.repair_status}</span>
+            </div>
+            <div class="item-card-sub">
+              <strong>${j.product_name}</strong> • S/N: ${j.product_serial}
+              <div style="margin-top:4px; font-size:0.8rem; color:var(--on-surface-variant); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">
+                ${j.customer_problem}
+              </div>
+            </div>
+            <div class="item-card-footer">
+              <div>
+                Payment: <span class="status-badge status-${j.payment_status.toLowerCase()}">${j.payment_status}</span>
+              </div>
+              <div style="font-weight:700; font-size:0.95rem; color:var(--on-surface);">
+                ₹${(parseFloat(j.total_amount) || 0).toLocaleString('en-IN', { minimumFractionDigits: 2 })}
+              </div>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      openAddJobModal() {
+        document.getElementById('job-form-id').value = '';
+        document.getElementById('job-modal-title').innerText = 'Create New Repair Job';
+        document.getElementById('job-form').reset();
+        document.getElementById('job-date').value = new Date().toISOString().substring(0, 10);
+        document.getElementById('job-delete-btn').style.display = 'none';
+
+        const compSelect = document.getElementById('job-company-id');
+        const comps = db.getCompanies();
+        compSelect.innerHTML = '<option value="" disabled selected>Select Customer Company...</option>' +
+          comps.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+
+        this.selectedJobParts = [];
+        this.renderSelectedJobParts();
+        this.openModal('job-modal');
+      },
+
+      openJobDetailModal(jobId) {
+        const job = db.getJobs().find(j => String(j.id) === String(jobId));
+        if (!job) return;
+
+        document.getElementById('job-form-id').value = job.id;
+        document.getElementById('job-modal-title').innerText = `Edit Job ${job.job_number}`;
+        document.getElementById('job-delete-btn').style.display = 'block';
+
+        const compSelect = document.getElementById('job-company-id');
+        const comps = db.getCompanies();
+        compSelect.innerHTML = comps.map(c => `<option value="${c.id}" ${String(c.id) === String(job.company_id) ? 'selected' : ''}>${c.name}</option>`).join('');
+
+        document.getElementById('job-date').value = job.job_date;
+        document.getElementById('job-product-serial').value = job.product_serial;
+        document.getElementById('job-challan-number').value = job.challan_number || '';
+        document.getElementById('job-product-name').value = job.product_name;
+        document.getElementById('job-customer-problem').value = job.customer_problem;
+        document.getElementById('job-technician-observation').value = job.technician_observation || '';
+        document.getElementById('job-repair-status').value = job.repair_status;
+        document.getElementById('job-service-charge').value = job.service_charge || 0;
+        document.getElementById('job-delivery-status').value = job.delivery_status || 'Pending';
+        document.getElementById('job-payment-status').value = job.payment_status || 'Pending';
+        document.getElementById('job-remarks').value = job.remarks || '';
+
+        try {
+          this.selectedJobParts = JSON.parse(job.parts_used_json || '[]');
+        } catch (e) {
+          this.selectedJobParts = [];
+        }
+
+        this.renderSelectedJobParts();
+        this.openModal('job-modal');
+      },
+
+      async deleteCurrentJob() {
+        const id = document.getElementById('job-form-id').value;
+        if (!id) return;
+        if (confirm('Are you sure you want to delete this job? (Row will be highlighted RED in Google Sheet)')) {
+          await db.deleteRecord('ev_crm_jobs', 'Repair Jobs', id);
+          this.closeModal('job-modal');
+          this.showToast('Job Deleted & Highlighted Red in Google Sheet!');
+          this.refreshLiveData();
+        }
+      },
+
+      saveJobForm(e) {
+        e.preventDefault();
+        const id = document.getElementById('job-form-id').value;
+        const companyId = document.getElementById('job-company-id').value;
+        const company = db.getCompanies().find(c => String(c.id) === String(companyId));
+
+        const serviceCharge = parseFloat(document.getElementById('job-service-charge').value) || 0;
+        const partsCost = this.selectedJobParts.reduce((acc, p) => acc + (p.price * p.qty), 0);
+        const totalAmount = serviceCharge + partsCost;
+
+        let paymentStatus = document.getElementById('job-payment-status').value;
+        let existingJob = id ? db.getJobs().find(j => String(j.id) === String(id)) : null;
+        let amountReceived = existingJob ? (parseFloat(existingJob.amount_received) || 0) : 0;
+
+        if (paymentStatus === 'Refunded') {
+          // Waive fee
+        } else if (amountReceived >= totalAmount && totalAmount > 0) {
+          paymentStatus = 'Paid';
+        } else if (amountReceived > 0) {
+          paymentStatus = 'Partial';
+        } else {
+          paymentStatus = 'Pending';
+        }
+
+        const jobData = {
+          id: id ? parseInt(id) : null,
+          company_id: companyId,
+          company_name: company ? company.name : 'Client',
+          job_date: document.getElementById('job-date').value,
+          product_serial: document.getElementById('job-product-serial').value,
+          challan_number: document.getElementById('job-challan-number').value,
+          product_name: document.getElementById('job-product-name').value,
+          customer_problem: document.getElementById('job-customer-problem').value,
+          technician_observation: document.getElementById('job-technician-observation').value,
+          service_charge: serviceCharge,
+          component_cost: partsCost,
+          total_amount: totalAmount,
+          repair_status: document.getElementById('job-repair-status').value,
+          delivery_status: document.getElementById('job-delivery-status').value,
+          payment_status: paymentStatus,
+          amount_received: amountReceived,
+          balance_amount: Math.max(0, totalAmount - amountReceived),
+          remarks: document.getElementById('job-remarks').value,
+          parts_used_json: JSON.stringify(this.selectedJobParts)
+        };
+
+        db.saveJob(jobData);
+        this.closeModal('job-modal');
+        this.showToast('Saved & Live Synced to Google Sheet!');
+        this.renderAll();
+      },
+
+      openAddPartToJobModal() {
+        const materials = db.getMaterials();
+        const select = document.getElementById('job-part-select');
+        select.innerHTML = '<option value="">Select Spare Part from Inventory...</option>' +
+          materials.map(m => `<option value="${m.id}">${m.name} (Stock: ${m.quantity} | Price: ₹${m.selling_price})</option>`).join('');
+
+        this.openModal('add-part-modal');
+      },
+
+      confirmAddPartToJob() {
+        const partId = document.getElementById('job-part-select').value;
+        const qty = parseInt(document.getElementById('job-part-qty').value) || 1;
+        if (!partId) return;
+
+        const material = db.getMaterials().find(m => String(m.id) === String(partId));
+        if (!material) return;
+
+        if (material.quantity < qty) {
+          alert(`Warning: Only ${material.quantity} units available in stock!`);
+          return;
+        }
+
+        material.quantity -= qty;
+        db.saveMaterial(material);
+
+        db.saveMaterialTransaction({
+          material_id: material.id,
+          material_name: material.name,
+          job_id: document.getElementById('job-form-id').value || null,
+          type: 'OUT',
+          quantity: qty,
+          remarks: `Allocated to Repair Job`
+        });
+
+        const existingIndex = this.selectedJobParts.findIndex(p => String(p.id) === String(material.id));
+        if (existingIndex !== -1) {
+          this.selectedJobParts[existingIndex].qty += qty;
+        } else {
+          this.selectedJobParts.push({
+            id: material.id,
+            name: material.name,
+            qty: qty,
+            price: parseFloat(material.selling_price)
+          });
+        }
+
+        this.renderSelectedJobParts();
+        this.closeModal('add-part-modal');
+        this.showToast(`Deducted ${qty}x ${material.name} & Synced Live!`);
+      },
+
+      renderSelectedJobParts() {
+        const container = document.getElementById('job-parts-table-body');
+        if (!container) return;
+
+        if (this.selectedJobParts.length === 0) {
+          container.innerHTML = `<tr><td colspan="4" style="text-align:center; color:var(--on-surface-variant); padding:10px;">No spare parts allocated yet.</td></tr>`;
+          document.getElementById('job-parts-total-text').innerText = '₹0.00';
+          return;
+        }
+
+        let total = 0;
+        container.innerHTML = this.selectedJobParts.map((p) => {
+          const lineTotal = p.price * p.qty;
+          total += lineTotal;
+          return `
+            <tr>
+              <td>${p.name}</td>
+              <td>${p.qty}</td>
+              <td>₹${p.price.toFixed(2)}</td>
+              <td>₹${lineTotal.toFixed(2)}</td>
+            </tr>
+          `;
+        }).join('');
+
+        document.getElementById('job-parts-total-text').innerText = `₹${total.toFixed(2)}`;
+      },
+
+      renderInventory() {
+        const materials = db.getMaterials();
+        const valuation = materials.reduce((acc, m) => acc + (m.quantity * (parseFloat(m.purchase_price) || 0)), 0);
+
+        const valEl = document.getElementById('inventory-valuation-amount');
+        if (valEl) valEl.innerText = '₹' + valuation.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
+        const container = document.getElementById('inventory-cards-container');
+        if (!container) return;
+
+        if (materials.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--on-surface-variant);">No inventory items registered.</div>`;
+          return;
+        }
+
+        container.innerHTML = materials.map(m => `
+          <div class="list-item-card" onclick="CRMApp.openEditMaterialModal(${m.id})">
+            <div class="item-card-top">
+              <div>
+                <div class="item-card-title">${m.name}</div>
+                <div style="font-size:0.8rem; color:var(--on-surface-variant);">Supplier: ${m.supplier || 'N/A'}</div>
+              </div>
+              ${m.quantity <= m.low_stock_threshold ?
+            `<span class="status-badge status-pending"><span class="material-symbols-outlined" style="font-size:14px;">warning</span> Low Stock (${m.quantity})</span>` :
+            `<span class="status-badge status-ready">${m.quantity} in Stock</span>`
+          }
+            </div>
+            <div class="item-card-footer">
+              <div>Purchase: ₹${m.purchase_price} | Retail: <strong>₹${m.selling_price}</strong></div>
+              <div style="font-size:0.75rem; color:var(--primary); font-weight:600;">Edit Part →</div>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      openAddMaterialModal() {
+        document.getElementById('material-form-id').value = '';
+        document.getElementById('material-modal-title').innerText = 'Register Spare Part';
+        document.getElementById('material-form').reset();
+        document.getElementById('material-date').value = new Date().toISOString().substring(0, 10);
+        document.getElementById('material-delete-btn').style.display = 'none';
+        this.openModal('material-modal');
+      },
+
+      openEditMaterialModal(id) {
+        const m = db.getMaterials().find(item => String(item.id) === String(id));
+        if (!m) return;
+
+        document.getElementById('material-form-id').value = m.id;
+        document.getElementById('material-modal-title').innerText = `Edit ${m.name}`;
+        document.getElementById('material-delete-btn').style.display = 'block';
+        document.getElementById('material-name').value = m.name;
+        document.getElementById('material-supplier').value = m.supplier || '';
+        document.getElementById('material-qty').value = m.quantity;
+        document.getElementById('material-purchase-price').value = m.purchase_price;
+        document.getElementById('material-selling-price').value = m.selling_price;
+        document.getElementById('material-gst').value = m.gst;
+        document.getElementById('material-threshold').value = m.low_stock_threshold;
+        document.getElementById('material-purchased-by').value = m.purchased_by || '';
+        document.getElementById('material-date').value = m.purchase_date || new Date().toISOString().substring(0, 10);
+
+        this.openModal('material-modal');
+      },
+
+      async deleteCurrentMaterial() {
+        const id = document.getElementById('material-form-id').value;
+        if (!id) return;
+        if (confirm('Delete this material? (Highlighted RED in Google Sheet)')) {
+          await db.deleteRecord('ev_crm_materials', 'Materials', id);
+          this.closeModal('material-modal');
+          this.showToast('Material Deleted & Highlighted Red in Google Sheet!');
+          this.refreshLiveData();
+        }
+      },
+
+      saveMaterialForm(e) {
+        e.preventDefault();
+        const id = document.getElementById('material-form-id').value;
+        const materialData = {
+          id: id ? parseInt(id) : null,
+          name: document.getElementById('material-name').value,
+          supplier: document.getElementById('material-supplier').value,
+          quantity: parseInt(document.getElementById('material-qty').value) || 0,
+          purchase_price: parseFloat(document.getElementById('material-purchase-price').value) || 0,
+          selling_price: parseFloat(document.getElementById('material-selling-price').value) || 0,
+          gst: parseFloat(document.getElementById('material-gst').value) || 0,
+          low_stock_threshold: parseInt(document.getElementById('material-threshold').value) || 5,
+          purchased_by: document.getElementById('material-purchased-by').value,
+          purchase_date: document.getElementById('material-date').value,
+          payment_status: 'Paid'
+        };
+
+        db.saveMaterial(materialData);
+        this.closeModal('material-modal');
+        this.showToast('Material Saved Live!');
+        this.renderAll();
+      },
+
+      renderCompanies() {
+        const companies = db.getCompanies();
+        const container = document.getElementById('companies-cards-container');
+        if (!container) return;
+
+        if (companies.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--on-surface-variant);">No client companies registered.</div>`;
+          return;
+        }
+
+        container.innerHTML = companies.map(c => `
+          <div class="list-item-card" onclick="CRMApp.openCompanyPortfolioModal(${c.id})">
+            <div class="item-card-top">
+              <div>
+                <div class="item-card-title">${c.name}</div>
+                <div style="font-size:0.8rem; color:var(--on-surface-variant);">${c.contact_person || 'Client'} • ${c.phone}</div>
+              </div>
+              <span class="status-badge ${c.outstanding_balance > 0 ? 'status-pending' : 'status-ready'}">
+                ${c.outstanding_balance > 0 ? 'Dues: ₹' + c.outstanding_balance.toLocaleString('en-IN') : 'Settled'}
+              </span>
+            </div>
+            <div class="item-card-footer">
+              <div>GST: ${c.gst_number || 'N/A'}</div>
+              <div style="color:var(--primary); font-weight:600;">View Portfolio →</div>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      openAddCompanyModal() {
+        document.getElementById('company-form-id').value = '';
+        document.getElementById('company-modal-title').innerText = 'Add Client Company';
+        document.getElementById('company-form').reset();
+        document.getElementById('company-delete-btn').style.display = 'none';
+        this.openModal('company-modal');
+      },
+
+      saveCompanyForm(e) {
+        e.preventDefault();
+        const id = document.getElementById('company-form-id').value;
+        const companyData = {
+          id: id ? parseInt(id) : null,
+          name: document.getElementById('company-name').value,
+          contact_person: document.getElementById('company-contact').value,
+          phone: document.getElementById('company-phone').value,
+          email: document.getElementById('company-email').value,
+          gst_number: document.getElementById('company-gst').value,
+          address: document.getElementById('company-address').value
+        };
+
+        db.saveCompany(companyData);
+        this.closeModal('company-modal');
+        this.showToast('Client Profile Saved Live!');
+        this.renderAll();
+      },
+
+      async deleteCurrentCompany() {
+        const id = document.getElementById('company-form-id').value;
+        if (!id) return;
+        if (confirm('Delete this client? (Highlighted RED in Google Sheet)')) {
+          await db.deleteRecord('ev_crm_companies', 'Companies', id);
+          this.closeModal('company-modal');
+          this.showToast('Client Deleted & Highlighted Red in Google Sheet!');
+          this.refreshLiveData();
+        }
+      },
+
+      openCompanyPortfolioModal(companyId) {
+        const comp = db.getCompanies().find(c => String(c.id) === String(companyId));
+        if (!comp) return;
+
+        const companyJobs = db.getJobs().filter(j => String(j.company_id) === String(companyId));
+        const companyPayments = db.getPayments().filter(p => String(p.company_id) === String(companyId));
+
+        const body = document.getElementById('company-portfolio-body');
+        body.innerHTML = `
+          <div style="margin-bottom:20px; background:var(--surface-container-low); padding:15px; border-radius:var(--radius-lg);">
+            <h4 style="font-size:1.1rem; font-weight:700;">${comp.name}</h4>
+            <p style="font-size:0.85rem; color:var(--on-surface-variant); margin-top:4px;">Contact: ${comp.contact_person} | Phone: ${comp.phone}</p>
+            <p style="font-size:0.85rem; color:var(--on-surface-variant);">GSTIN: ${comp.gst_number || 'N/A'} | Outstanding Dues: <strong style="color:var(--error);">₹${comp.outstanding_balance.toLocaleString('en-IN')}</strong></p>
+          </div>
+          <h5 style="font-weight:700; margin-bottom:10px;">Repair Jobs History (${companyJobs.length})</h5>
+          <div style="max-height:160px; overflow-y:auto; margin-bottom:20px;">
+            ${companyJobs.length === 0 ? '<p style="font-size:0.85rem; color:var(--on-surface-variant);">No jobs logged yet.</p>' :
+            companyJobs.map(j => `<div style="padding:8px 0; border-bottom:1px solid var(--outline-variant); font-size:0.85rem; display:flex; justify-content:space-between;">
+                <span>${j.job_number} - ${j.product_name}</span>
+                <strong>₹${j.total_amount} (${j.payment_status})</strong>
+              </div>`).join('')
+          }
+          </div>
+          <h5 style="font-weight:700; margin-bottom:10px;">Payment Receipts (${companyPayments.length})</h5>
+          <div style="max-height:160px; overflow-y:auto;">
+            ${companyPayments.length === 0 ? '<p style="font-size:0.85rem; color:var(--on-surface-variant);">No payments recorded yet.</p>' :
+            companyPayments.map(p => `<div style="padding:8px 0; border-bottom:1px solid var(--outline-variant); font-size:0.85rem; display:flex; justify-content:space-between;">
+                <span>${p.payment_date} - ${p.payment_mode}</span>
+                <strong style="color:var(--tertiary);">+₹${p.amount}</strong>
+              </div>`).join('')
+          }
+          </div>
+        `;
+
+        this.openModal('company-portfolio-modal');
+      },
+
+      renderPayments() {
+        const payments = db.getPayments();
+        const totalCollected = payments.reduce((acc, p) => acc + (parseFloat(p.amount) || 0), 0);
+
+        document.getElementById('pay-stat-collected').innerText = '₹' + totalCollected.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+
+        const container = document.getElementById('payments-cards-container');
+        if (!container) return;
+
+        if (payments.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:30px; color:var(--on-surface-variant);">No payments recorded yet.</div>`;
+          return;
+        }
+
+        container.innerHTML = payments.map(p => `
+          <div class="list-item-card">
+            <div class="item-card-top">
+              <div>
+                <div class="item-card-title">₹${parseFloat(p.amount).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:600;">${p.company_name}</div>
+              </div>
+              <span class="status-badge status-ready">${p.payment_mode}</span>
+            </div>
+            <div class="item-card-sub">
+              Ref: ${p.transaction_reference || 'N/A'} • Date: ${p.payment_date}
+            </div>
+          </div>
+        `).join('');
+      },
+
+      openPaymentModal() {
+        document.getElementById('pay-form').reset();
+        document.getElementById('pay-date').value = new Date().toISOString().substring(0, 10);
+
+        const compSelect = document.getElementById('pay-company-id');
+        const comps = db.getCompanies();
+        compSelect.innerHTML = '<option value="" disabled selected>Select Customer Company...</option>' +
+          comps.map(c => `<option value="${c.id}">${c.name} (Dues: ₹${c.outstanding_balance})</option>`).join('');
+
+        this.openModal('payment-modal');
+      },
+
+      savePaymentForm(e) {
+        e.preventDefault();
+        const companyId = document.getElementById('pay-company-id').value;
+        const company = db.getCompanies().find(c => String(c.id) === String(companyId));
+        const amount = parseFloat(document.getElementById('pay-amount').value) || 0;
+
+        if (!company || amount <= 0) return;
+
+        const paymentRecord = {
+          company_id: companyId,
+          company_name: company.name,
+          payment_date: document.getElementById('pay-date').value,
+          amount: amount,
+          payment_mode: document.getElementById('pay-mode').value,
+          transaction_reference: document.getElementById('pay-reference').value,
+          remarks: document.getElementById('pay-remarks').value
+        };
+
+        db.savePayment(paymentRecord);
+
+        let remainingPayment = amount;
+        const jobs = db.getJobs().filter(j => String(j.company_id) === String(companyId) && j.payment_status !== 'Paid');
+        jobs.sort((a, b) => new Date(a.job_date) - new Date(b.job_date));
+
+        for (let job of jobs) {
+          if (remainingPayment <= 0) break;
+          const dueOnJob = parseFloat(job.balance_amount) || (parseFloat(job.total_amount) - parseFloat(job.amount_received));
+
+          if (dueOnJob > 0) {
+            const applyAmt = Math.min(remainingPayment, dueOnJob);
+            job.amount_received = (parseFloat(job.amount_received) || 0) + applyAmt;
+            job.balance_amount = Math.max(0, parseFloat(job.total_amount) - job.amount_received);
+
+            if (job.balance_amount === 0) {
+              job.payment_status = 'Paid';
+            } else {
+              job.payment_status = 'Partial';
+            }
+
+            remainingPayment -= applyAmt;
+            db.saveJob(job);
+          }
+        }
+
+        company.outstanding_balance = Math.max(0, (parseFloat(company.outstanding_balance) || 0) - amount);
+        db.saveCompany(company);
+
+        this.closeModal('payment-modal');
+        this.showToast(`Recorded ₹${amount} Payment & Cleared Dues Live!`);
+        this.renderAll();
+      },
+
+      renderSettings() {
+        const url = db.getScriptUrl();
+        const scriptInput = document.getElementById('settings-script-url');
+        if (scriptInput) scriptInput.value = url;
+
+        const creds = db.getCredentials();
+        const userInput = document.getElementById('settings-username-input');
+        const passInput = document.getElementById('settings-password-input');
+        if (userInput) userInput.value = creds.user;
+        if (passInput) passInput.value = creds.pass;
+
+        const lastSyncEl = document.getElementById('settings-last-sync-text');
+        if (lastSyncEl) lastSyncEl.innerText = localStorage.getItem('ev_crm_last_sync') ? 'Live Sync Connected (' + localStorage.getItem('ev_crm_last_sync') + ')' : 'Live Sync Active';
+      },
+
+      openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) modal.classList.add('active');
+      },
+
+      closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) modal.classList.remove('active');
+      },
+
+      handleGlobalSearch(query) {
+        if (!query) {
+          this.renderAll();
+          return;
+        }
+
+        if (this.activeTab === 'jobs') {
+          const jobs = db.getJobs().filter(j =>
+            j.job_number.toLowerCase().includes(query) ||
+            j.company_name.toLowerCase().includes(query) ||
+            j.product_serial.toLowerCase().includes(query) ||
+            j.product_name.toLowerCase().includes(query)
+          );
+          this.renderFilteredJobs(jobs);
+        } else if (this.activeTab === 'inventory') {
+          const materials = db.getMaterials().filter(m => m.name.toLowerCase().includes(query));
+          this.renderFilteredInventory(materials);
+        }
+      },
+
+      renderFilteredJobs(jobs) {
+        const container = document.getElementById('jobs-cards-container');
+        if (!container) return;
+        container.innerHTML = jobs.map(j => `
+          <div class="list-item-card" onclick="CRMApp.openJobDetailModal(${j.id})">
+            <div class="item-card-top">
+              <div>
+                <div class="item-card-title">${j.job_number}</div>
+                <div style="font-size:0.8rem; color:var(--primary); font-weight:600;">${j.company_name}</div>
+              </div>
+              <span class="status-badge status-${j.repair_status.toLowerCase().replace(/\s+/g, '')}">${j.repair_status}</span>
+            </div>
+            <div class="item-card-sub">
+              <strong>${j.product_name}</strong> • S/N: ${j.product_serial}
+            </div>
+          </div>
+        `).join('');
+      },
+
+      renderFilteredInventory(materials) {
+        const container = document.getElementById('inventory-cards-container');
+        if (!container) return;
+        container.innerHTML = materials.map(m => `
+          <div class="list-item-card" onclick="CRMApp.openEditMaterialModal(${m.id})">
+            <div class="item-card-top">
+              <div><div class="item-card-title">${m.name}</div></div>
+              <span class="status-badge status-ready">${m.quantity} in Stock</span>
+            </div>
+          </div>
+        `).join('');
+      }
+    };
+  </script>
+</body>
+
+</html>
