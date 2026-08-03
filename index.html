@@ -1029,21 +1029,16 @@
         <!-- Credential Management Card -->
         <div class="content-card">
           <div class="card-title-row">
-            <h2>Login Credentials Setup</h2>
+            <h2>Apps Script Security Credentials</h2>
             <span class="material-symbols-outlined" style="color:var(--primary);">admin_panel_settings</span>
           </div>
-          <form id="settings-creds-form" onsubmit="CRMApp.saveNewCredentials(event)">
-            <div class="form-group">
-              <label>Set Username *</label>
-              <input type="text" id="settings-username-input" class="form-control" placeholder="Username" required />
-            </div>
-            <div class="form-group">
-              <label>Set New Password *</label>
-              <input type="password" id="settings-password-input" class="form-control" placeholder="Password"
-                required />
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Update Login Credentials</button>
-          </form>
+          <p style="font-size:0.85rem; color:var(--on-surface-variant); margin-bottom:12px;">
+            Your CRM username and password are secured directly inside your Google Apps Script backend code.
+          </p>
+          <div style="background:var(--surface-container-low); padding:12px 14px; border-radius:var(--radius-sm); font-size:0.85rem; border-left:4px solid var(--primary);">
+            <strong>To change Username or Password:</strong><br/>
+            Open your Google Sheet &gt; <strong>Extensions &gt; Apps Script</strong> and change <code>SERVER_AUTH_USER</code> and <code>SERVER_AUTH_PASS</code> in <code>Code.gs</code>.
+          </div>
         </div>
 
         <!-- Google Sheets Backend Card -->
