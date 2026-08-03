@@ -1565,7 +1565,8 @@
               localStorage.setItem(DB_KEYS.AUTH_PASS, cleanPass);
               return { success: true };
             } else {
-              return { success: false, error: data ? data.error : 'Invalid Username or Password!' };
+              const errMsg = (data && data.error && !data.error.includes('Unauthorized access')) ? data.error : 'Invalid Username or Password!';
+              return { success: false, error: errMsg };
             }
           } catch (err) {
             console.warn('Google Apps Script login check failed, falling back to local credentials:', err);
@@ -1847,8 +1848,8 @@
         this.checkAuthSession();
         this.bindEvents();
 
-        // Fetch latest credentials & data from Google Sheets immediately on startup (even when logged out)
-        if (db.getScriptUrl()) {
+        // Fetch latest data from Google Sheets immediately on startup if logged in
+        if (db.isLoggedIn() && db.getScriptUrl()) {
           await db.fetchFromGoogleSheets();
           this.checkAuthSession();
         }
