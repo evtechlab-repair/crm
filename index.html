@@ -1525,6 +1525,7 @@
 
         // Sync credentials to backend Google Sheet ('Settings' tab) so all devices update live
         this.saveRecordLive('Settings', {
+          id: 'AUTH_USER',
           key: 'AUTH_USER',
           value: cleanUser,
           updated_by: this.getCurrentUser(),
@@ -1532,6 +1533,7 @@
         });
 
         this.saveRecordLive('Settings', {
+          id: 'AUTH_PASS',
           key: 'AUTH_PASS',
           value: cleanPass,
           updated_by: this.getCurrentUser(),
@@ -1814,9 +1816,15 @@
       activeTab: 'dashboard',
       selectedJobParts: [],
 
-      init() {
+      async init() {
         this.checkAuthSession();
         this.bindEvents();
+
+        // Fetch latest credentials & data from Google Sheets immediately on startup (even when logged out)
+        if (db.getScriptUrl()) {
+          await db.fetchFromGoogleSheets();
+          this.checkAuthSession();
+        }
       },
 
       checkAuthSession() {
@@ -1852,11 +1860,22 @@
         }
       },
 
-      handleLogin(e) {
+      async handleLogin(e) {
         e.preventDefault();
         const u = document.getElementById('login-username').value;
         const p = document.getElementById('login-password').value;
         const errorMsg = document.getElementById('login-error-msg');
+
+        if (errorMsg) {
+          errorMsg.innerText = 'Verifying credentials with server...';
+          errorMsg.style.display = 'block';
+          errorMsg.style.color = 'var(--primary)';
+        }
+
+        // Always sync latest credentials from Google Sheet before validating login
+        if (db.getScriptUrl()) {
+          await db.fetchFromGoogleSheets();
+        }
 
         const res = db.login(u, p);
         if (res.success) {
@@ -1867,6 +1886,7 @@
           if (errorMsg) {
             errorMsg.innerText = res.error;
             errorMsg.style.display = 'block';
+            errorMsg.style.color = 'var(--error)';
           }
         }
       },
