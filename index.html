@@ -1517,8 +1517,26 @@
       }
 
       saveCredentials(newUser, newPass) {
-        localStorage.setItem(DB_KEYS.AUTH_USER, newUser.trim());
-        localStorage.setItem(DB_KEYS.AUTH_PASS, newPass.trim());
+        const cleanUser = newUser.trim();
+        const cleanPass = newPass.trim();
+
+        localStorage.setItem(DB_KEYS.AUTH_USER, cleanUser);
+        localStorage.setItem(DB_KEYS.AUTH_PASS, cleanPass);
+
+        // Sync credentials to backend Google Sheet ('Settings' tab) so all devices update live
+        this.saveRecordLive('Settings', {
+          key: 'AUTH_USER',
+          value: cleanUser,
+          updated_by: this.getCurrentUser(),
+          updated_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        });
+
+        this.saveRecordLive('Settings', {
+          key: 'AUTH_PASS',
+          value: cleanPass,
+          updated_by: this.getCurrentUser(),
+          updated_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
+        });
       }
 
       isLoggedIn() {
@@ -1745,6 +1763,16 @@
             localStorage.setItem(DB_KEYS.MATERIALS, JSON.stringify(data.materials || []));
             localStorage.setItem(DB_KEYS.MATERIAL_TRANSACTIONS, JSON.stringify(data.material_transactions || []));
 
+            if (data.settings && Array.isArray(data.settings)) {
+              data.settings.forEach(setting => {
+                if (setting.key === 'AUTH_USER' && setting.value !== undefined && setting.value !== null && String(setting.value).trim() !== '') {
+                  localStorage.setItem(DB_KEYS.AUTH_USER, String(setting.value).trim());
+                } else if (setting.key === 'AUTH_PASS' && setting.value !== undefined && setting.value !== null && String(setting.value).trim() !== '') {
+                  localStorage.setItem(DB_KEYS.AUTH_PASS, String(setting.value).trim());
+                }
+              });
+            }
+
             localStorage.setItem(DB_KEYS.LAST_SYNC, new Date().toLocaleTimeString());
             return { success: true };
           } else {
@@ -1859,8 +1887,8 @@
         if (!newU || !newP) return;
 
         db.saveCredentials(newU, newP);
-        this.showToast('✅ Login Credentials Updated Successfully!');
-        alert(`Success!\n\nNew Username: ${newU}\nNew Password: ${newP}\n\nPlease update API_SECRET_PASSCODE in Google Apps Script Code.gs if you modified your password.`);
+        this.showToast('✅ Login Credentials Updated & Synced Live!');
+        alert(`Success!\n\nNew Username: ${newU}\nNew Password: ${newP}\n\nCredentials saved & synced live across all connected devices!`);
       },
 
       startMultiDeviceLiveSync() {
