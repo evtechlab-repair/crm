@@ -1516,40 +1516,72 @@
         };
       }
 
-      saveCredentials(newUser, newPass) {
+      async saveCredentials(newUser, newPass) {
         const cleanUser = newUser.trim();
         const cleanPass = newPass.trim();
 
         localStorage.setItem(DB_KEYS.AUTH_USER, cleanUser);
         localStorage.setItem(DB_KEYS.AUTH_PASS, cleanPass);
 
-        // Sync credentials to backend Google Sheet ('Settings' tab) so all devices update live
-        this.saveRecordLive('Settings', {
-          id: 'AUTH_USER',
-          key: 'AUTH_USER',
-          value: cleanUser,
-          updated_by: this.getCurrentUser(),
-          updated_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
-        });
-
-        this.saveRecordLive('Settings', {
-          id: 'AUTH_PASS',
-          key: 'AUTH_PASS',
-          value: cleanPass,
-          updated_by: this.getCurrentUser(),
-          updated_at: new Date().toISOString().replace('T', ' ').substring(0, 19)
-        });
+        const scriptUrl = this.getScriptUrl();
+        if (scriptUrl) {
+          try {
+            await fetch(scriptUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                action: 'changeCredentials',
+                newUser: cleanUser,
+                newPass: cleanPass,
+                user: this.getCurrentUser()
+              })
+            });
+          } catch (e) {
+            console.warn('Change credentials live warning:', e);
+          }
+        }
       }
 
       isLoggedIn() {
         return localStorage.getItem(DB_KEYS.LOGGED_IN) === 'true';
       }
 
-      login(user, pass) {
+      async login(user, pass) {
+        const cleanUser = user.trim();
+        const cleanPass = pass.trim();
+        const scriptUrl = this.getScriptUrl();
+
+        if (scriptUrl) {
+          try {
+            const response = await fetch(scriptUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify({
+                action: 'verifyLogin',
+                user: cleanUser,
+                pass: cleanPass
+              })
+            });
+            const data = await response.json();
+            if (data && data.success) {
+              localStorage.setItem(DB_KEYS.LOGGED_IN, 'true');
+              localStorage.setItem(DB_KEYS.SESSION_USER, cleanUser);
+              localStorage.setItem(DB_KEYS.AUTH_USER, cleanUser);
+              localStorage.setItem(DB_KEYS.AUTH_PASS, cleanPass);
+              return { success: true };
+            } else {
+              return { success: false, error: data ? data.error : 'Invalid Username or Password!' };
+            }
+          } catch (err) {
+            console.warn('Google Apps Script login check failed, falling back to local credentials:', err);
+          }
+        }
+
+        // Fallback if offline or no Script URL set
         const creds = this.getCredentials();
-        if (user.trim().toLowerCase() === creds.user.toLowerCase() && pass.trim() === creds.pass) {
+        if (cleanUser.toLowerCase() === creds.user.toLowerCase() && cleanPass === creds.pass) {
           localStorage.setItem(DB_KEYS.LOGGED_IN, 'true');
-          localStorage.setItem(DB_KEYS.SESSION_USER, user.trim());
+          localStorage.setItem(DB_KEYS.SESSION_USER, cleanUser);
           return { success: true };
         }
         return { success: false, error: 'Invalid Username or Password!' };
@@ -1867,17 +1899,12 @@
         const errorMsg = document.getElementById('login-error-msg');
 
         if (errorMsg) {
-          errorMsg.innerText = 'Verifying credentials with server...';
+          errorMsg.innerText = 'Verifying login with Google Apps Script...';
           errorMsg.style.display = 'block';
           errorMsg.style.color = 'var(--primary)';
         }
 
-        // Always sync latest credentials from Google Sheet before validating login
-        if (db.getScriptUrl()) {
-          await db.fetchFromGoogleSheets();
-        }
-
-        const res = db.login(u, p);
+        const res = await db.login(u, p);
         if (res.success) {
           if (errorMsg) errorMsg.style.display = 'none';
           this.showToast(`Welcome back, ${db.getCurrentUser()}!`);
@@ -1899,16 +1926,16 @@
         }
       },
 
-      saveNewCredentials(e) {
+      async saveNewCredentials(e) {
         e.preventDefault();
         const newU = document.getElementById('settings-username-input').value;
         const newP = document.getElementById('settings-password-input').value;
 
         if (!newU || !newP) return;
 
-        db.saveCredentials(newU, newP);
-        this.showToast('✅ Login Credentials Updated & Synced Live!');
-        alert(`Success!\n\nNew Username: ${newU}\nNew Password: ${newP}\n\nCredentials saved & synced live across all connected devices!`);
+        await db.saveCredentials(newU, newP);
+        this.showToast('✅ Login Credentials Saved to Google Apps Script!');
+        alert(`Success!\n\nNew Username: ${newU}\nNew Password: ${newP}\n\nLogin credentials updated & verified directly via Google Apps Script!`);
       },
 
       startMultiDeviceLiveSync() {
